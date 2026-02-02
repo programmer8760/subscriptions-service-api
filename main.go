@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/golang-migrate/migrate/v4"
 	"github.com/joho/godotenv"
 	"github.com/prajkin/em-test-task/database"
 )
@@ -22,7 +23,7 @@ func main() {
 	log.Println("db connected succesfully")
 
 	err = database.MigrateUp(db)
-	if err != nil {
+	if err != nil && err != migrate.ErrNoChange {
 		log.Fatal(err)
 	}
 }
