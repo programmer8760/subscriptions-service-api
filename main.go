@@ -8,6 +8,8 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/prajkin/em-test-task/database"
 	"github.com/prajkin/em-test-task/internal/handler"
+	"github.com/prajkin/em-test-task/internal/repository"
+	"github.com/prajkin/em-test-task/internal/service"
 )
 
 func main() {
@@ -29,7 +31,9 @@ func main() {
 		log.Fatal(err)
 	}
 
-	h := handler.NewHandler()
+	repo := repository.NewSubscriptionsRepository(db)
+	svc := service.NewSubscriptionsService(repo)
+	h := handler.NewHandler(svc)
 	if err = http.ListenAndServe(":3000", h); err != nil {
 		log.Fatal(err)
 	}

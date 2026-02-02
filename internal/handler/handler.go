@@ -2,15 +2,19 @@ package handler
 
 import (
 	"net/http"
+
+	"github.com/prajkin/em-test-task/internal/service"
 )
 
 type Handler struct {
-	routes *http.ServeMux
+	routes        *http.ServeMux
+	subscriptions *service.SubscriptionsService
 }
 
-func NewHandler() *Handler {
+func NewHandler(subs *service.SubscriptionsService) *Handler {
 	h := &Handler{
-		routes: http.NewServeMux(),
+		routes:        http.NewServeMux(),
+		subscriptions: subs,
 	}
 
 	// h.routes.HandleFunc("GET /subscriptions", h.GetSubscriptions)
