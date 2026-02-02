@@ -3,6 +3,6 @@ CREATE TABLE IF NOT EXISTS subscriptions(
   name varchar(255) NOT NULL,
   price integer NOT NULL,
   user_id uuid NOT NULL,
-  start_date bigint NOT NULL,
-  end_date bigint
+  start_date timestamptz NOT NULL,
+  end_date timestamptz
 );
