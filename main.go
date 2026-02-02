@@ -27,8 +27,12 @@ func main() {
 	log.Println("db connected succesfully")
 
 	err = database.MigrateUp(db)
-	if err != nil && err != migrate.ErrNoChange {
+	if err == migrate.ErrNoChange {
+		log.Println("db migrations: no changes")
+	} else if err != nil {
 		log.Fatal(err)
+	} else {
+		log.Println("db migrated succesfully")
 	}
 
 	repo := repository.NewSubscriptionsRepository(db)
