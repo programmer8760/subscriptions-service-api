@@ -20,4 +20,9 @@ func main() {
 		log.Fatal(err)
 	}
 	log.Println("db connected succesfully")
+
+	err = database.MigrateUp(db)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
