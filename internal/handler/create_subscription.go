@@ -10,11 +10,11 @@ import (
 )
 
 type CreateSubscriptionRequest struct {
-	Name      string    `json:"name"`
-	Price     int       `json:"price"`
-	UserID    uuid.UUID `json:"user_id"`
-	StartDate time.Time `json:"start_date"`
-	EndDate   time.Time `json:"end_date"`
+	Name      string     `json:"name"`
+	Price     int        `json:"price"`
+	UserID    uuid.UUID  `json:"user_id"`
+	StartDate time.Time  `json:"start_date"`
+	EndDate   *time.Time `json:"end_date,omitempty"`
 }
 
 func (h *Handler) CreateSubscription(w http.ResponseWriter, r *http.Request) {
