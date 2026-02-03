@@ -20,6 +20,7 @@ func NewHandler(subs *service.SubscriptionsService) *Handler {
 	h.routes.HandleFunc("GET /subscriptions", h.GetAllSubscriptions)
 	h.routes.HandleFunc("GET /subscriptions/{id}", h.GetSubscriptionByID)
 	h.routes.HandleFunc("POST /subscriptions", h.CreateSubscription)
+	h.routes.HandleFunc("DELETE /subscriptions/{id}", h.DeleteSubscription)
 
 	return h
 }
