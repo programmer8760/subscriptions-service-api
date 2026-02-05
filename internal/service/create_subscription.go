@@ -17,6 +17,14 @@ func (s *SubscriptionsService) CreateSubscription(ctx context.Context, sub domai
 	if sub.StartDate.Time.IsZero() {
 		return domain.Subscription{}, domain.ErrInvalidStartDate
 	}
+	if sub.EndDate != nil {
+		if (*sub.EndDate).Time.IsZero() {
+			return domain.Subscription{}, domain.ErrInvalidEndDate
+		}
+		if (*sub.EndDate).Time.Before(sub.StartDate.Time) {
+			return domain.Subscription{}, domain.ErrEndBeforeStart
+		}
+	}
 
 	if err := s.repo.Create(ctx, &sub); err != nil {
 		return domain.Subscription{}, err
