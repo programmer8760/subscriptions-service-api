@@ -12,4 +12,5 @@ var (
 	ErrNoChanges            = errors.New("request doesn't change anything")
 	ErrInvalidFromDate      = errors.New("invalid period start date")
 	ErrInvalidToDate        = errors.New("invalid period end date")
+	ErrEndBeforeStart       = errors.New("end date must be after start date")
 )
