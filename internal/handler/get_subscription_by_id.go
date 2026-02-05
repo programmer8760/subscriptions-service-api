@@ -12,6 +12,10 @@ func (h *Handler) GetSubscriptionByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	id64, err := strconv.ParseUint(r.PathValue("id"), 10, 64)
+	if err != nil {
+		http.Error(w, domain.ErrInvalidID.Error(), 400)
+		return
+	}
 	ctx := r.Context()
 
 	resp, err := h.subscriptions.GetSubscriptionByID(ctx, uint(id64))
