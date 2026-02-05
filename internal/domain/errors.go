@@ -10,4 +10,6 @@ var (
 	ErrInvalidEndDate       = errors.New("invalid subscription end date")
 	ErrSubscriptionNotFound = errors.New("subscription not found")
 	ErrNoChanges            = errors.New("request doesn't change anything")
+	ErrInvalidFromDate      = errors.New("invalid period start date")
+	ErrInvalidToDate        = errors.New("invalid period end date")
 )
