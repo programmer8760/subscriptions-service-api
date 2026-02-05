@@ -30,10 +30,10 @@ func (h *Handler) GetTotalPrice(w http.ResponseWriter, r *http.Request) {
 	var userID *uuid.UUID
 	if uidStr := r.URL.Query().Get("user_id"); uidStr != "" {
 		if uid, err := uuid.Parse(uidStr); err != nil {
-			userID = &uid
-		} else {
 			http.Error(w, err.Error(), 400)
 			return
+		} else {
+			userID = &uid
 		}
 	}
 
