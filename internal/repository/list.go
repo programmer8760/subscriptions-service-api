@@ -20,16 +20,19 @@ func (r *SubscriptionsRepository) List(ctx context.Context) ([]domain.Subscripti
 	var subs []domain.Subscription
 	for rows.Next() {
 		var (
-			sub     domain.Subscription
-			endDate sql.NullTime
+			sub       domain.Subscription
+			startDate sql.NullTime
+			endDate   sql.NullTime
 		)
-		err := rows.Scan(&sub.ID, &sub.Name, &sub.Price, &sub.UserID, &sub.StartDate, &endDate)
+		err := rows.Scan(&sub.ID, &sub.Name, &sub.Price, &sub.UserID, &startDate, &endDate)
 		if err != nil {
 			return nil, err
 		}
 
+		sub.StartDate = domain.NewDate(startDate.Time)
 		if endDate.Valid {
-			sub.EndDate = &endDate.Time
+			t := domain.NewDate(endDate.Time)
+			sub.EndDate = &t
 		}
 		subs = append(subs, sub)
 	}

@@ -26,12 +26,12 @@ func (s *SubscriptionsService) UpdateSubscription(ctx context.Context, req dto.U
 		}
 	}
 	if req.StartDate != nil {
-		if (*req.StartDate).IsZero() {
+		if (*req.StartDate).Time.IsZero() {
 			return domain.ErrInvalidStartDate
 		}
 	}
 	if req.EndDate != nil {
-		if (*req.EndDate).IsZero() {
+		if (*req.EndDate).Time.IsZero() {
 			return domain.ErrInvalidEndDate
 		}
 	}

@@ -3,18 +3,17 @@ package handler
 import (
 	"encoding/json"
 	"net/http"
-	"time"
 
 	"github.com/google/uuid"
 	"github.com/prajkin/em-test-task/internal/domain"
 )
 
 type CreateSubscriptionRequest struct {
-	Name      string     `json:"name"`
-	Price     int        `json:"price"`
-	UserID    uuid.UUID  `json:"user_id"`
-	StartDate time.Time  `json:"start_date"`
-	EndDate   *time.Time `json:"end_date,omitempty"`
+	Name      string       `json:"name"`
+	Price     int          `json:"price"`
+	UserID    uuid.UUID    `json:"user_id"`
+	StartDate domain.Date  `json:"start_date"`
+	EndDate   *domain.Date `json:"end_date,omitempty"`
 }
 
 func (h *Handler) CreateSubscription(w http.ResponseWriter, r *http.Request) {

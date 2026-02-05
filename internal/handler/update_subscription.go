@@ -4,18 +4,18 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/google/uuid"
+	"github.com/prajkin/em-test-task/internal/domain"
 	"github.com/prajkin/em-test-task/internal/dto"
 )
 
 type UpdateSubscriptionRequest struct {
-	Name      *string    `json:"name,omitempty"`
-	Price     *int       `json:"price,omitempty"`
-	UserID    *uuid.UUID `json:"user_id,omitempty"`
-	StartDate *time.Time `json:"start_date,omitempty"`
-	EndDate   *time.Time `json:"end_date,omitempty"`
+	Name      *string      `json:"name,omitempty"`
+	Price     *int         `json:"price,omitempty"`
+	UserID    *uuid.UUID   `json:"user_id,omitempty"`
+	StartDate *domain.Date `json:"start_date,omitempty"`
+	EndDate   *domain.Date `json:"end_date,omitempty"`
 }
 
 func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {

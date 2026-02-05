@@ -1,9 +1,8 @@
 package dto
 
 import (
-	"time"
-
 	"github.com/google/uuid"
+	"github.com/prajkin/em-test-task/internal/domain"
 )
 
 type UpdateSubscriptionDTO struct {
@@ -11,6 +10,6 @@ type UpdateSubscriptionDTO struct {
 	Name      *string
 	Price     *int
 	UserID    *uuid.UUID
-	StartDate *time.Time
-	EndDate   *time.Time
+	StartDate *domain.Date
+	EndDate   *domain.Date
 }

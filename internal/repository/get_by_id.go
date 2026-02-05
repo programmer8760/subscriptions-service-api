@@ -9,14 +9,15 @@ import (
 
 func (r *SubscriptionsRepository) GetByID(ctx context.Context, id uint) (domain.Subscription, error) {
 	var (
-		sub     domain.Subscription
-		endDate sql.NullTime
+		sub       domain.Subscription
+		startDate sql.NullTime
+		endDate   sql.NullTime
 	)
 	err := r.db.QueryRowContext(
 		ctx,
 		"SELECT * FROM subscriptions WHERE id = $1",
 		id,
-	).Scan(&sub.ID, &sub.Name, &sub.Price, &sub.UserID, &sub.StartDate, &endDate)
+	).Scan(&sub.ID, &sub.Name, &sub.Price, &sub.UserID, &startDate, &endDate)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return domain.Subscription{}, domain.ErrSubscriptionNotFound
@@ -24,8 +25,10 @@ func (r *SubscriptionsRepository) GetByID(ctx context.Context, id uint) (domain.
 		return domain.Subscription{}, err
 	}
 
+	sub.StartDate = domain.NewDate(startDate.Time)
 	if endDate.Valid {
-		sub.EndDate = &endDate.Time
+		t := domain.NewDate(endDate.Time)
+		sub.EndDate = &t
 	}
 
 	return sub, nil

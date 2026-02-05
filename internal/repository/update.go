@@ -36,13 +36,13 @@ func (r *SubscriptionsRepository) Update(ctx context.Context, req dto.UpdateSubs
 		builder.WriteString("start_date = $")
 		builder.WriteString(strconv.Itoa(len(args) + 1))
 		builder.WriteRune(' ')
-		args = append(args, req.StartDate)
+		args = append(args, req.StartDate.Time)
 	}
 	if req.EndDate != nil {
 		builder.WriteString("end_date = $")
 		builder.WriteString(strconv.Itoa(len(args) + 1))
 		builder.WriteRune(' ')
-		args = append(args, req.EndDate)
+		args = append(args, req.EndDate.Time)
 	}
 	builder.WriteString("WHERE id = $")
 	builder.WriteString(strconv.Itoa(len(args) + 1))

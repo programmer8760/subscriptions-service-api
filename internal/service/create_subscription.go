@@ -14,7 +14,7 @@ func (s *SubscriptionsService) CreateSubscription(ctx context.Context, sub domai
 	if sub.Price <= 0 {
 		return domain.Subscription{}, domain.ErrInvalidPrice
 	}
-	if sub.StartDate.IsZero() {
+	if sub.StartDate.Time.IsZero() {
 		return domain.Subscription{}, domain.ErrInvalidStartDate
 	}
 
