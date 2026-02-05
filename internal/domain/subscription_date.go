@@ -1,6 +1,7 @@
 package domain
 
 import (
+	"database/sql/driver"
 	"encoding/json"
 	"strings"
 	"time"
@@ -34,4 +35,8 @@ func (d *Date) UnmarshalJSON(b []byte) error {
 	d.Time = t
 
 	return nil
+}
+
+func (d Date) Value() (driver.Value, error) {
+	return d.Time, nil
 }
