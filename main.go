@@ -1,14 +1,16 @@
 package main
 
 import (
-	"log"
+	"log/slog"
 	"net/http"
+	"os"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/joho/godotenv"
 	"github.com/prajkin/em-test-task/database"
 	_ "github.com/prajkin/em-test-task/docs"
 	"github.com/prajkin/em-test-task/internal/handler"
+	"github.com/prajkin/em-test-task/internal/logger"
 	"github.com/prajkin/em-test-task/internal/repository"
 	"github.com/prajkin/em-test-task/internal/service"
 )
@@ -19,35 +21,45 @@ import (
 // @host localhost:8080
 // @BasePath /
 func main() {
+	log := logger.New(slog.LevelInfo)
+
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal(err)
+		log.Error("loading .env file failed", "err", err)
+		os.Exit(1)
 	}
 
 	db, err := database.Connect()
 	if err != nil {
-		log.Fatal(err)
+		log.Error("database connection failed", "err", err)
+		os.Exit(1)
 	}
 	defer db.Close()
 
 	if err = db.Ping(); err != nil {
-		log.Fatal(err)
+		log.Error("database didn't respond to ping", "err", err)
+		os.Exit(1)
 	}
-	log.Println("db connected succesfully")
+	log.Info("database connection established")
 
 	err = database.MigrateUp(db)
-	if err == migrate.ErrNoChange {
-		log.Println("db migrations: no changes")
-	} else if err != nil {
-		log.Fatal(err)
+	if err != nil {
+		if err == migrate.ErrNoChange {
+			log.Info("database migrations: no changes")
+		} else {
+			log.Error("database migration failed", "err", err)
+			os.Exit(1)
+		}
 	} else {
-		log.Println("db migrated succesfully")
+		log.Info("database migrations: success")
 	}
 
 	repo := repository.NewSubscriptionsRepository(db)
 	svc := service.NewSubscriptionsService(repo)
 	h := handler.NewHandler(svc)
 	if err = http.ListenAndServe(":8080", h); err != nil {
-		log.Fatal(err)
+		log.Error("http server stopped", "err", err, "addr", ":8080")
+		os.Exit(1)
 	}
+	log.Info("http server started", "addr", ":8080")
 }
