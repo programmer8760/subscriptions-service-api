@@ -29,7 +29,7 @@ type UpdateSubscriptionRequest struct {
 // @Failure 400 {object} domain.ErrorResponse
 // @Failure 404 {object} domain.ErrorResponse
 // @Failure 500 {object} domain.ErrorResponse
-// @Router /subscriptions [put]
+// @Router /subscriptions/{id} [put]
 func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
 	var req UpdateSubscriptionRequest
 	id64, err := strconv.ParseUint(r.PathValue("id"), 10, 64)
