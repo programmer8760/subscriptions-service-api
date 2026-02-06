@@ -57,9 +57,11 @@ func main() {
 	repo := repository.NewSubscriptionsRepository(db)
 	svc := service.NewSubscriptionsService(repo, log)
 	h := handler.NewHandler(svc, log)
-	if err = http.ListenAndServe(":8080", h); err != nil {
-		log.Error("http server stopped", "err", err, "addr", ":8080")
+
+	addr := ":" + os.Getenv("HTTP_PORT")
+	if err = http.ListenAndServe(addr, h); err != nil {
+		log.Error("http server stopped", "err", err, "addr", addr)
 		os.Exit(1)
 	}
-	log.Info("http server started", "addr", ":8080")
+	log.Info("http server started", "addr", addr)
 }
