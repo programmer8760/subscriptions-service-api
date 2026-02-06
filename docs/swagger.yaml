@@ -1,10 +1,5 @@
 basePath: /
 definitions:
-  domain.Date:
-    properties:
-      time.Time:
-        type: string
-    type: object
   domain.ErrorResponse:
     properties:
       error:
@@ -13,7 +8,8 @@ definitions:
   domain.Subscription:
     properties:
       end_date:
-        $ref: '#/definitions/domain.Date'
+        example: 01-2006
+        type: string
       id:
         type: integer
       name:
@@ -21,20 +17,23 @@ definitions:
       price:
         type: integer
       start_date:
-        $ref: '#/definitions/domain.Date'
+        example: 01-2006
+        type: string
       user_id:
         type: string
     type: object
   handler.CreateSubscriptionRequest:
     properties:
       end_date:
-        $ref: '#/definitions/domain.Date'
+        example: 01-2006
+        type: string
       name:
         type: string
       price:
         type: integer
       start_date:
-        $ref: '#/definitions/domain.Date'
+        example: 01-2006
+        type: string
       user_id:
         type: string
     type: object
@@ -46,13 +45,15 @@ definitions:
   handler.UpdateSubscriptionRequest:
     properties:
       end_date:
-        $ref: '#/definitions/domain.Date'
+        example: 01-2006
+        type: string
       name:
         type: string
       price:
         type: integer
       start_date:
-        $ref: '#/definitions/domain.Date'
+        example: 01-2006
+        type: string
       user_id:
         type: string
     type: object

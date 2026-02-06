@@ -290,14 +290,6 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "domain.Date": {
-            "type": "object",
-            "properties": {
-                "time.Time": {
-                    "type": "string"
-                }
-            }
-        },
         "domain.ErrorResponse": {
             "type": "object",
             "properties": {
@@ -310,7 +302,8 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "end_date": {
-                    "$ref": "#/definitions/domain.Date"
+                    "type": "string",
+                    "example": "01-2006"
                 },
                 "id": {
                     "type": "integer"
@@ -322,7 +315,8 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "start_date": {
-                    "$ref": "#/definitions/domain.Date"
+                    "type": "string",
+                    "example": "01-2006"
                 },
                 "user_id": {
                     "type": "string"
@@ -333,7 +327,8 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "end_date": {
-                    "$ref": "#/definitions/domain.Date"
+                    "type": "string",
+                    "example": "01-2006"
                 },
                 "name": {
                     "type": "string"
@@ -342,7 +337,8 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "start_date": {
-                    "$ref": "#/definitions/domain.Date"
+                    "type": "string",
+                    "example": "01-2006"
                 },
                 "user_id": {
                     "type": "string"
@@ -361,7 +357,8 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "end_date": {
-                    "$ref": "#/definitions/domain.Date"
+                    "type": "string",
+                    "example": "01-2006"
                 },
                 "name": {
                     "type": "string"
@@ -370,7 +367,8 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "start_date": {
-                    "$ref": "#/definitions/domain.Date"
+                    "type": "string",
+                    "example": "01-2006"
                 },
                 "user_id": {
                     "type": "string"

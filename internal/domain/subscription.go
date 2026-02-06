@@ -9,6 +9,6 @@ type Subscription struct {
 	Name      string    `json:"name"`
 	Price     int       `json:"price"`
 	UserID    uuid.UUID `json:"user_id"`
-	StartDate Date      `json:"start_date"`
-	EndDate   *Date     `json:"end_date,omitempty"`
+	StartDate Date      `json:"start_date" example:"01-2006" swaggertype:"string"`
+	EndDate   *Date     `json:"end_date,omitempty" example:"01-2006" swaggertype:"string"`
 }

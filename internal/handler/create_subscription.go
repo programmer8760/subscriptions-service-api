@@ -12,8 +12,8 @@ type CreateSubscriptionRequest struct {
 	Name      string       `json:"name"`
 	Price     int          `json:"price"`
 	UserID    uuid.UUID    `json:"user_id"`
-	StartDate domain.Date  `json:"start_date"`
-	EndDate   *domain.Date `json:"end_date,omitempty"`
+	StartDate domain.Date  `json:"start_date" example:"01-2006" swaggertype:"string"`
+	EndDate   *domain.Date `json:"end_date,omitempty" example:"01-2006" swaggertype:"string"`
 }
 
 // @Summary Create subscription

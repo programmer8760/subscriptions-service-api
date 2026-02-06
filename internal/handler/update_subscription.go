@@ -14,8 +14,8 @@ type UpdateSubscriptionRequest struct {
 	Name      *string      `json:"name,omitempty"`
 	Price     *int         `json:"price,omitempty"`
 	UserID    *uuid.UUID   `json:"user_id,omitempty"`
-	StartDate *domain.Date `json:"start_date,omitempty"`
-	EndDate   *domain.Date `json:"end_date,omitempty"`
+	StartDate *domain.Date `json:"start_date,omitempty" example:"01-2006" swaggertype:"string"`
+	EndDate   *domain.Date `json:"end_date,omitempty" example:"01-2006" swaggertype:"string"`
 }
 
 // @Summary Update subscription
