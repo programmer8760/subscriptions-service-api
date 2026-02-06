@@ -27,10 +27,15 @@ func (h *Handler) GetSubscriptionByID(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	resp, err := h.subscriptions.GetSubscriptionByID(ctx, uint(id64))
-	if err == domain.ErrSubscriptionNotFound {
-		WriteErrorJSON(w, err, 404)
-		return
-	} else if err != nil {
+	if err != nil {
+		if err == domain.ErrSubscriptionNotFound {
+			WriteErrorJSON(w, err, 404)
+			return
+		}
+		if err == domain.ErrInvalidID {
+			WriteErrorJSON(w, err, 400)
+			return
+		}
 		WriteErrorJSON(w, err, 500)
 		return
 	}
