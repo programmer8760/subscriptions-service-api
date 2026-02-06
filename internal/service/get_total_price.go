@@ -10,14 +10,14 @@ import (
 
 func (s *SubscriptionsService) GetTotalPrice(ctx context.Context, req dto.GetTotalPriceDTO) (int, error) {
 	if req.From.Time.IsZero() {
-		return 0, domain.ErrInvalidFromDate
+		return 0, domain.BadRequest{domain.ErrInvalidFromDate}
 	}
 	if req.To.Time.IsZero() {
-		return 0, domain.ErrInvalidToDate
+		return 0, domain.BadRequest{domain.ErrInvalidToDate}
 	}
 	if req.Name != nil {
 		if *req.Name = strings.TrimSpace(*req.Name); *req.Name == "" {
-			return 0, domain.ErrInvalidName
+			return 0, domain.BadRequest{domain.ErrInvalidName}
 		}
 	}
 

@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 	"time"
 
@@ -60,6 +61,11 @@ func (h *Handler) GetTotalPrice(w http.ResponseWriter, r *http.Request) {
 		UserID: userID,
 	})
 	if err != nil {
+		var br domain.BadRequest
+		if errors.As(err, &br) {
+			WriteErrorJSON(w, err, 400)
+			return
+		}
 		WriteErrorJSON(w, err, 500)
 		return
 	}
