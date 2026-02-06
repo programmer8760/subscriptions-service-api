@@ -26,6 +26,7 @@ type UpdateSubscriptionRequest struct {
 // @Param request body UpdateSubscriptionRequest true "Subscription payload"
 // @Success 204 "No Content"
 // @Failure 400 {object} domain.ErrorResponse
+// @Failure 404 {object} domain.ErrorResponse
 // @Failure 500 {object} domain.ErrorResponse
 // @Router /subscriptions [put]
 func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
@@ -53,6 +54,10 @@ func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
 		EndDate:   req.EndDate,
 	})
 	if err != nil {
+		if err == domain.ErrSubscriptionNotFound {
+			WriteErrorJSON(w, err, 404)
+			return
+		}
 		WriteErrorJSON(w, err, 500)
 		return
 	}
