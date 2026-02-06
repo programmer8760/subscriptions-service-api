@@ -59,9 +59,9 @@ func main() {
 	h := handler.NewHandler(svc, log)
 
 	addr := ":" + os.Getenv("HTTP_PORT")
+	log.Info("http server started", "addr", addr)
 	if err = http.ListenAndServe(addr, h); err != nil {
 		log.Error("http server stopped", "err", err, "addr", addr)
 		os.Exit(1)
 	}
-	log.Info("http server started", "addr", addr)
 }
