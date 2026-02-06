@@ -19,8 +19,6 @@ type UpdateSubscriptionRequest struct {
 }
 
 func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
 	var req UpdateSubscriptionRequest
 	id64, err := strconv.ParseUint(r.PathValue("id"), 10, 64)
 	if err != nil {

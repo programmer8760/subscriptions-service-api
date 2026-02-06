@@ -17,8 +17,6 @@ type CreateSubscriptionRequest struct {
 }
 
 func (h *Handler) CreateSubscription(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
 	var req CreateSubscriptionRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
@@ -40,6 +38,7 @@ func (h *Handler) CreateSubscription(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(resp)
 }

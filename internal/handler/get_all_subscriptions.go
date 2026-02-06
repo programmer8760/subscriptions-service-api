@@ -6,8 +6,6 @@ import (
 )
 
 func (h *Handler) GetAllSubscriptions(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
 	ctx := r.Context()
 
 	resp, err := h.subscriptions.GetAllSubscriptions(ctx)
@@ -16,5 +14,6 @@ func (h *Handler) GetAllSubscriptions(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(resp)
 }

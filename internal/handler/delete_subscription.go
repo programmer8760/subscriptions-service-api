@@ -8,8 +8,6 @@ import (
 )
 
 func (h *Handler) DeleteSubscription(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
 	id64, err := strconv.ParseUint(r.PathValue("id"), 10, 64)
 	ctx := r.Context()
 

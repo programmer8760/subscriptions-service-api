@@ -9,8 +9,6 @@ import (
 )
 
 func (h *Handler) GetSubscriptionByID(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
 	id64, err := strconv.ParseUint(r.PathValue("id"), 10, 64)
 	if err != nil {
 		http.Error(w, domain.ErrInvalidID.Error(), 400)
@@ -27,5 +25,6 @@ func (h *Handler) GetSubscriptionByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(resp)
 }

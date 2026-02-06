@@ -11,8 +11,6 @@ import (
 )
 
 func (h *Handler) GetTotalPrice(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
 	from, err := time.Parse("01-2006", r.URL.Query().Get("from"))
 	if err != nil {
 		http.Error(w, domain.ErrInvalidFromDate.Error(), 400)
@@ -50,5 +48,6 @@ func (h *Handler) GetTotalPrice(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(resp)
 }
