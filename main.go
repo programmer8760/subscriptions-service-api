@@ -41,7 +41,7 @@ func main() {
 	repo := repository.NewSubscriptionsRepository(db)
 	svc := service.NewSubscriptionsService(repo)
 	h := handler.NewHandler(svc)
-	if err = http.ListenAndServe(":3000", h); err != nil {
+	if err = http.ListenAndServe(":8080", h); err != nil {
 		log.Fatal(err)
 	}
 }
