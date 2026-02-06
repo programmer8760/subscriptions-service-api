@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 
 	"github.com/google/uuid"
@@ -44,6 +45,11 @@ func (h *Handler) CreateSubscription(w http.ResponseWriter, r *http.Request) {
 		EndDate:   req.EndDate,
 	})
 	if err != nil {
+		var br domain.BadRequest
+		if errors.As(err, &br) {
+			WriteErrorJSON(w, err, 400)
+			return
+		}
 		WriteErrorJSON(w, err, 500)
 		return
 	}

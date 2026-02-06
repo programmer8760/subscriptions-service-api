@@ -2,6 +2,14 @@ package domain
 
 import "errors"
 
+type BadRequest struct {
+	Err error
+}
+
+func (b BadRequest) Error() string {
+	return b.Err.Error()
+}
+
 var (
 	ErrInvalidID            = errors.New("invalid subscription id")
 	ErrInvalidName          = errors.New("invalid subscription name")
