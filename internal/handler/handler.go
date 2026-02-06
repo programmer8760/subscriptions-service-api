@@ -1,14 +1,19 @@
 package handler
 
 import (
+	"context"
 	"encoding/json"
 	"log/slog"
 	"net/http"
+	"time"
 
+	"github.com/google/uuid"
 	"github.com/prajkin/em-test-task/internal/domain"
 	"github.com/prajkin/em-test-task/internal/service"
 	swagger "github.com/swaggo/http-swagger"
 )
+
+const RequestIDKey string = "request_id"
 
 type Handler struct {
 	routes        *http.ServeMux
@@ -36,7 +41,26 @@ func NewHandler(subs *service.SubscriptionsService, log *slog.Logger) *Handler {
 }
 
 func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	h.routes.ServeHTTP(w, r)
+	start := time.Now()
+
+	reqID := r.Header.Get("X-Request-ID")
+	if reqID == "" {
+		reqID = uuid.NewString()
+	}
+
+	ctx := context.WithValue(r.Context(), RequestIDKey, reqID)
+	r = r.WithContext(ctx)
+	ww := NewWrapWriter(w)
+
+	h.routes.ServeHTTP(ww, r)
+
+	h.logger.Info("request",
+		"request_id", reqID,
+		"method", r.Method,
+		"path", r.URL.Path,
+		"status", ww.Status(),
+		"duration_ms", time.Since(start).Milliseconds(),
+	)
 }
 
 func WriteErrorJSON(w http.ResponseWriter, err error, code int) {
