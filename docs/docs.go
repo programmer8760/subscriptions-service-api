@@ -370,7 +370,7 @@ const docTemplate = `{
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "localhost:8080",
-	BasePath:         "/subscriptions",
+	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Subscriptions API",
 	Description:      "Simple subscription service",

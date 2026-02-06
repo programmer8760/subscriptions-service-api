@@ -1,4 +1,4 @@
-basePath: /subscriptions
+basePath: /
 definitions:
   domain.Date:
     properties:

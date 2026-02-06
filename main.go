@@ -17,7 +17,7 @@ import (
 // @version 1.0
 // @description Simple subscription service
 // @host localhost:8080
-// @BasePath /subscriptions
+// @BasePath /
 func main() {
 	err := godotenv.Load()
 	if err != nil {
