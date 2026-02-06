@@ -228,6 +228,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/domain.Subscription"
                         }
                     },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/domain.ErrorResponse"
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "schema": {

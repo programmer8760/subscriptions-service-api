@@ -14,6 +14,7 @@ import (
 // @Produce json
 // @Param id path string true "Subscription ID"
 // @Success 200 {object} domain.Subscription
+// @Failure 400 {object} domain.ErrorResponse
 // @Failure 404 {object} domain.ErrorResponse
 // @Failure 500 {object} domain.ErrorResponse
 // @Router /subscriptions/{id} [get]
