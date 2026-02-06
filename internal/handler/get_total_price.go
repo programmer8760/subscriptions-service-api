@@ -10,6 +10,10 @@ import (
 	"github.com/prajkin/em-test-task/internal/dto"
 )
 
+type GetTotalPriceResponse struct {
+	Price int `json:"price"`
+}
+
 // @Summary Get total subscriptions price
 // @Description Counts total price of subscriptions for specified period
 // @Tags subscriptions
@@ -18,7 +22,7 @@ import (
 // @Param to query string true "End of period"
 // @Param user_id query string false "User ID to filter subscriptions by"
 // @Param name query string false "Name of subscription to filter by"
-// @Success 200 {string} string
+// @Success 200 {object} GetTotalPriceResponse
 // @Failure 400 {object} domain.ErrorResponse
 // @Failure 500 {object} domain.ErrorResponse
 // @Router /subscriptions/price [get]
@@ -61,5 +65,5 @@ func (h *Handler) GetTotalPrice(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(resp)
+	json.NewEncoder(w).Encode(GetTotalPriceResponse{Price: resp})
 }

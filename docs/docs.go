@@ -184,7 +184,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/handler.GetTotalPriceResponse"
                         }
                     },
                     "400": {
@@ -346,6 +346,14 @@ const docTemplate = `{
                 },
                 "user_id": {
                     "type": "string"
+                }
+            }
+        },
+        "handler.GetTotalPriceResponse": {
+            "type": "object",
+            "properties": {
+                "price": {
+                    "type": "integer"
                 }
             }
         },

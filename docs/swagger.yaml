@@ -38,6 +38,11 @@ definitions:
       user_id:
         type: string
     type: object
+  handler.GetTotalPriceResponse:
+    properties:
+      price:
+        type: integer
+    type: object
   handler.UpdateSubscriptionRequest:
     properties:
       end_date:
@@ -227,7 +232,7 @@ paths:
         "200":
           description: OK
           schema:
-            type: string
+            $ref: '#/definitions/handler.GetTotalPriceResponse'
         "400":
           description: Bad Request
           schema:
