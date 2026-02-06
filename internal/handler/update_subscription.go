@@ -45,6 +45,7 @@ func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := r.Context()
+	h.logger.Info("request body", "request_id", ctx.Value(domain.RequestIDKey), "input", req, "subscription_id", id64)
 
 	err = h.subscriptions.UpdateSubscription(ctx, dto.UpdateSubscriptionDTO{
 		ID:        uint(id64),
@@ -64,7 +65,8 @@ func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
 			WriteErrorJSON(w, err, 404)
 			return
 		}
-		WriteErrorJSON(w, err, 500)
+		h.logger.Error("failed to update subscription", "request_id", ctx.Value(domain.RequestIDKey), "err", err)
+		WriteErrorJSON(w, errors.New("internal server error"), 500)
 		return
 	}
 

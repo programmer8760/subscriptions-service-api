@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"errors"
 	"net/http"
 	"strconv"
 
@@ -34,7 +35,8 @@ func (h *Handler) DeleteSubscription(w http.ResponseWriter, r *http.Request) {
 			WriteErrorJSON(w, err, 400)
 			return
 		}
-		WriteErrorJSON(w, err, 500)
+		h.logger.Error("failed to delete subscription", "request_id", ctx.Value(domain.RequestIDKey), "err", err)
+		WriteErrorJSON(w, errors.New("internal server error"), 500)
 		return
 	}
 

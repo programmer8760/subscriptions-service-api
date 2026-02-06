@@ -30,5 +30,6 @@ func (s *SubscriptionsService) CreateSubscription(ctx context.Context, sub domai
 		return domain.Subscription{}, err
 	}
 
+	s.logger.Info("subscription created", "request_id", ctx.Value(domain.RequestIDKey), "subscription", sub)
 	return sub, nil
 }

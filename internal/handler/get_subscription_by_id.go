@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 	"strconv"
 
@@ -36,7 +37,8 @@ func (h *Handler) GetSubscriptionByID(w http.ResponseWriter, r *http.Request) {
 			WriteErrorJSON(w, err, 400)
 			return
 		}
-		WriteErrorJSON(w, err, 500)
+		h.logger.Error("failed to get subscription by id", "request_id", ctx.Value(domain.RequestIDKey), "err", err)
+		WriteErrorJSON(w, errors.New("internal server error"), 500)
 		return
 	}
 

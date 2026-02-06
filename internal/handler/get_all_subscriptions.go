@@ -2,7 +2,10 @@ package handler
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
+
+	"github.com/prajkin/em-test-task/internal/domain"
 )
 
 // @Summary Get all subscriptions
@@ -18,7 +21,8 @@ func (h *Handler) GetAllSubscriptions(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := h.subscriptions.GetAllSubscriptions(ctx)
 	if err != nil {
-		WriteErrorJSON(w, err, 500)
+		h.logger.Error("failed to get all subscriptions", "request_id", ctx.Value(domain.RequestIDKey), "err", err)
+		WriteErrorJSON(w, errors.New("internal server error"), 500)
 		return
 	}
 

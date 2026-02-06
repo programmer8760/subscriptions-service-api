@@ -40,5 +40,6 @@ func (s *SubscriptionsService) UpdateSubscription(ctx context.Context, req dto.U
 		return err
 	}
 
+	s.logger.Info("subscription updated", "request_id", ctx.Value(domain.RequestIDKey), "payload", req)
 	return nil
 }

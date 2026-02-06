@@ -12,6 +12,10 @@ func (s *SubscriptionsService) DeleteSubscription(ctx context.Context, id uint) 
 	}
 
 	err := s.repo.Delete(ctx, id)
+	if err != nil {
+		return err
+	}
 
-	return err
+	s.logger.Info("subscription deleted", "request_id", ctx.Value(domain.RequestIDKey), "id", id)
+	return nil
 }

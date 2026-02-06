@@ -36,6 +36,7 @@ func (h *Handler) CreateSubscription(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := r.Context()
+	h.logger.Info("request body", "request_id", ctx.Value(domain.RequestIDKey), "input", req)
 
 	resp, err := h.subscriptions.CreateSubscription(ctx, domain.Subscription{
 		Name:      req.Name,
@@ -50,7 +51,8 @@ func (h *Handler) CreateSubscription(w http.ResponseWriter, r *http.Request) {
 			WriteErrorJSON(w, err, 400)
 			return
 		}
-		WriteErrorJSON(w, err, 500)
+		h.logger.Error("failed to create subscription", "request_id", ctx.Value(domain.RequestIDKey), "err", err)
+		WriteErrorJSON(w, errors.New("internal server error"), 500)
 		return
 	}
 
