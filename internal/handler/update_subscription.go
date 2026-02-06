@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 	"strconv"
 
@@ -54,6 +55,11 @@ func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
 		EndDate:   req.EndDate,
 	})
 	if err != nil {
+		var br domain.BadRequest
+		if errors.As(err, &br) {
+			WriteErrorJSON(w, err, 400)
+			return
+		}
 		if err == domain.ErrSubscriptionNotFound {
 			WriteErrorJSON(w, err, 404)
 			return
