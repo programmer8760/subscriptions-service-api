@@ -13,8 +13,6 @@ import (
 	swagger "github.com/swaggo/http-swagger"
 )
 
-const RequestIDKey string = "request_id"
-
 type Handler struct {
 	routes        *http.ServeMux
 	subscriptions *service.SubscriptionsService
@@ -48,7 +46,7 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		reqID = uuid.NewString()
 	}
 
-	ctx := context.WithValue(r.Context(), RequestIDKey, reqID)
+	ctx := context.WithValue(r.Context(), domain.RequestIDKey, reqID)
 	r = r.WithContext(ctx)
 	ww := NewWrapWriter(w)
 
