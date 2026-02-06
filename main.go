@@ -7,11 +7,17 @@ import (
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/joho/godotenv"
 	"github.com/prajkin/em-test-task/database"
+	_ "github.com/prajkin/em-test-task/docs"
 	"github.com/prajkin/em-test-task/internal/handler"
 	"github.com/prajkin/em-test-task/internal/repository"
 	"github.com/prajkin/em-test-task/internal/service"
 )
 
+// @title Subscriptions API
+// @version 1.0
+// @description Simple subscription service
+// @host localhost:8080
+// @BasePath /subscriptions
 func main() {
 	err := godotenv.Load()
 	if err != nil {

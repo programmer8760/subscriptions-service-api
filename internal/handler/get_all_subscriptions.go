@@ -5,6 +5,14 @@ import (
 	"net/http"
 )
 
+// @Summary Get all subscriptions
+// @Description Returns a list of all subscriptions
+// @Tags subscriptions
+// @Accept json
+// @Produce json
+// @Success 200 {array} domain.Subscription
+// @Failure 500 {string} string "internal server error"
+// @Router /subscriptions [get]
 func (h *Handler) GetAllSubscriptions(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 

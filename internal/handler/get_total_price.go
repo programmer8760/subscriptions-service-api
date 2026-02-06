@@ -10,6 +10,18 @@ import (
 	"github.com/prajkin/em-test-task/internal/dto"
 )
 
+// @Summary Get total subscriptions price
+// @Description Counts total price of subscriptions for specified period
+// @Tags subscriptions
+// @Produce json
+// @Param from path string true "Start of period"
+// @Param to path string true "End of period"
+// @Param user_id path string false "User ID to filter subscriptions by"
+// @Param name path string false "Name of subscription to filter by"
+// @Success 200 {string} string
+// @Failure 400 {string} string "bad request"
+// @Failure 500 {string} string "internal server error"
+// @Router /subscriptions/price [get]
 func (h *Handler) GetTotalPrice(w http.ResponseWriter, r *http.Request) {
 	from, err := time.Parse("01-2006", r.URL.Query().Get("from"))
 	if err != nil {

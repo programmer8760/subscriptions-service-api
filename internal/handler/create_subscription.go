@@ -16,6 +16,16 @@ type CreateSubscriptionRequest struct {
 	EndDate   *domain.Date `json:"end_date,omitempty"`
 }
 
+// @Summary Create subscription
+// @Description Creates a new subscription
+// @Tags subscriptions
+// @Accept json
+// @Produce json
+// @Param request body CreateSubscriptionRequest true "Subscription payload"
+// @Success 201 {object} domain.Subscription
+// @Failure 400 {string} string "bad request"
+// @Failure 500 {string} string "internal server error"
+// @Router /subscriptions [post]
 func (h *Handler) CreateSubscription(w http.ResponseWriter, r *http.Request) {
 	var req CreateSubscriptionRequest
 	err := json.NewDecoder(r.Body).Decode(&req)

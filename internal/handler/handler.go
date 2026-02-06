@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/prajkin/em-test-task/internal/service"
+	swagger "github.com/swaggo/http-swagger"
 )
 
 type Handler struct {
@@ -23,6 +24,8 @@ func NewHandler(subs *service.SubscriptionsService) *Handler {
 	h.routes.HandleFunc("PUT /subscriptions/{id}", h.UpdateSubscription)
 	h.routes.HandleFunc("DELETE /subscriptions/{id}", h.DeleteSubscription)
 	h.routes.HandleFunc("GET /subscriptions/price", h.GetTotalPrice)
+
+	h.routes.Handle("GET /swagger/", swagger.WrapHandler)
 
 	return h
 }

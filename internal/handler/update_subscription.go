@@ -18,6 +18,16 @@ type UpdateSubscriptionRequest struct {
 	EndDate   *domain.Date `json:"end_date,omitempty"`
 }
 
+// @Summary Update subscription
+// @Description Updates an existing subscription
+// @Tags subscriptions
+// @Accept json
+// @Param id path string true "Subscription ID"
+// @Param request body UpdateSubscriptionRequest true "Subscription payload"
+// @Success 204 "No Content"
+// @Failure 400 {string} string "bad request"
+// @Failure 500 {string} string "internal server error"
+// @Router /subscriptions [put]
 func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
 	var req UpdateSubscriptionRequest
 	id64, err := strconv.ParseUint(r.PathValue("id"), 10, 64)

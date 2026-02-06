@@ -1,0 +1,225 @@
+basePath: /subscriptions
+definitions:
+  domain.Date:
+    properties:
+      time.Time:
+        type: string
+    type: object
+  domain.Subscription:
+    properties:
+      end_date:
+        $ref: '#/definitions/domain.Date'
+      id:
+        type: integer
+      name:
+        type: string
+      price:
+        type: integer
+      start_date:
+        $ref: '#/definitions/domain.Date'
+      user_id:
+        type: string
+    type: object
+  handler.CreateSubscriptionRequest:
+    properties:
+      end_date:
+        $ref: '#/definitions/domain.Date'
+      name:
+        type: string
+      price:
+        type: integer
+      start_date:
+        $ref: '#/definitions/domain.Date'
+      user_id:
+        type: string
+    type: object
+  handler.UpdateSubscriptionRequest:
+    properties:
+      end_date:
+        $ref: '#/definitions/domain.Date'
+      name:
+        type: string
+      price:
+        type: integer
+      start_date:
+        $ref: '#/definitions/domain.Date'
+      user_id:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Simple subscription service
+  title: Subscriptions API
+  version: "1.0"
+paths:
+  /subscriptions:
+    get:
+      consumes:
+      - application/json
+      description: Returns a list of all subscriptions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.Subscription'
+            type: array
+        "500":
+          description: internal server error
+          schema:
+            type: string
+      summary: Get all subscriptions
+      tags:
+      - subscriptions
+    post:
+      consumes:
+      - application/json
+      description: Creates a new subscription
+      parameters:
+      - description: Subscription payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateSubscriptionRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/domain.Subscription'
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
+      summary: Create subscription
+      tags:
+      - subscriptions
+    put:
+      consumes:
+      - application/json
+      description: Updates an existing subscription
+      parameters:
+      - description: Subscription ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Subscription payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateSubscriptionRequest'
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
+      summary: Update subscription
+      tags:
+      - subscriptions
+  /subscriptions/{id}:
+    delete:
+      description: Deletes a subscription
+      parameters:
+      - description: Subscription ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: subscription not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
+      summary: Delete subscription
+      tags:
+      - subscriptions
+    get:
+      description: Fetches a subscription with specified ID
+      parameters:
+      - description: Subscription ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Subscription'
+        "404":
+          description: subscription not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
+      summary: Get subscription by ID
+      tags:
+      - subscriptions
+  /subscriptions/price:
+    get:
+      description: Counts total price of subscriptions for specified period
+      parameters:
+      - description: Start of period
+        in: path
+        name: from
+        required: true
+        type: string
+      - description: End of period
+        in: path
+        name: to
+        required: true
+        type: string
+      - description: User ID to filter subscriptions by
+        in: path
+        name: user_id
+        type: string
+      - description: Name of subscription to filter by
+        in: path
+        name: name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
+      summary: Get total subscriptions price
+      tags:
+      - subscriptions
+swagger: "2.0"
