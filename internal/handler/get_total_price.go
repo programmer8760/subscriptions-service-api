@@ -14,10 +14,10 @@ import (
 // @Description Counts total price of subscriptions for specified period
 // @Tags subscriptions
 // @Produce json
-// @Param from path string true "Start of period"
-// @Param to path string true "End of period"
-// @Param user_id path string false "User ID to filter subscriptions by"
-// @Param name path string false "Name of subscription to filter by"
+// @Param from query string true "Start of period"
+// @Param to query string true "End of period"
+// @Param user_id query string false "User ID to filter subscriptions by"
+// @Param name query string false "Name of subscription to filter by"
 // @Success 200 {string} string
 // @Failure 400 {object} domain.ErrorResponse
 // @Failure 500 {object} domain.ErrorResponse

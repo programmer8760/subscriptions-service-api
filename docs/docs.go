@@ -157,27 +157,27 @@ const docTemplate = `{
                         "type": "string",
                         "description": "Start of period",
                         "name": "from",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "string",
                         "description": "End of period",
                         "name": "to",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "string",
                         "description": "User ID to filter subscriptions by",
                         "name": "user_id",
-                        "in": "path"
+                        "in": "query"
                     },
                     {
                         "type": "string",
                         "description": "Name of subscription to filter by",
                         "name": "name",
-                        "in": "path"
+                        "in": "query"
                     }
                 ],
                 "responses": {

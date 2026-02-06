@@ -204,21 +204,21 @@ paths:
       description: Counts total price of subscriptions for specified period
       parameters:
       - description: Start of period
-        in: path
+        in: query
         name: from
         required: true
         type: string
       - description: End of period
-        in: path
+        in: query
         name: to
         required: true
         type: string
       - description: User ID to filter subscriptions by
-        in: path
+        in: query
         name: user_id
         type: string
       - description: Name of subscription to filter by
-        in: path
+        in: query
         name: name
         type: string
       produces:
