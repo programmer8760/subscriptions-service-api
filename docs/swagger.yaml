@@ -5,6 +5,11 @@ definitions:
       time.Time:
         type: string
     type: object
+  domain.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
   domain.Subscription:
     properties:
       end_date:
@@ -68,9 +73,9 @@ paths:
               $ref: '#/definitions/domain.Subscription'
             type: array
         "500":
-          description: internal server error
+          description: Internal Server Error
           schema:
-            type: string
+            $ref: '#/definitions/domain.ErrorResponse'
       summary: Get all subscriptions
       tags:
       - subscriptions
@@ -93,13 +98,13 @@ paths:
           schema:
             $ref: '#/definitions/domain.Subscription'
         "400":
-          description: bad request
+          description: Bad Request
           schema:
-            type: string
+            $ref: '#/definitions/domain.ErrorResponse'
         "500":
-          description: internal server error
+          description: Internal Server Error
           schema:
-            type: string
+            $ref: '#/definitions/domain.ErrorResponse'
       summary: Create subscription
       tags:
       - subscriptions
@@ -123,13 +128,17 @@ paths:
         "204":
           description: No Content
         "400":
-          description: bad request
+          description: Bad Request
           schema:
-            type: string
+            $ref: '#/definitions/domain.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/domain.ErrorResponse'
         "500":
-          description: internal server error
+          description: Internal Server Error
           schema:
-            type: string
+            $ref: '#/definitions/domain.ErrorResponse'
       summary: Update subscription
       tags:
       - subscriptions
@@ -146,13 +155,13 @@ paths:
         "204":
           description: No Content
         "404":
-          description: subscription not found
+          description: Not Found
           schema:
-            type: string
+            $ref: '#/definitions/domain.ErrorResponse'
         "500":
-          description: internal server error
+          description: Internal Server Error
           schema:
-            type: string
+            $ref: '#/definitions/domain.ErrorResponse'
       summary: Delete subscription
       tags:
       - subscriptions
@@ -172,13 +181,13 @@ paths:
           schema:
             $ref: '#/definitions/domain.Subscription'
         "404":
-          description: subscription not found
+          description: Not Found
           schema:
-            type: string
+            $ref: '#/definitions/domain.ErrorResponse'
         "500":
-          description: internal server error
+          description: Internal Server Error
           schema:
-            type: string
+            $ref: '#/definitions/domain.ErrorResponse'
       summary: Get subscription by ID
       tags:
       - subscriptions
@@ -212,13 +221,13 @@ paths:
           schema:
             type: string
         "400":
-          description: bad request
+          description: Bad Request
           schema:
-            type: string
+            $ref: '#/definitions/domain.ErrorResponse'
         "500":
-          description: internal server error
+          description: Internal Server Error
           schema:
-            type: string
+            $ref: '#/definitions/domain.ErrorResponse'
       summary: Get total subscriptions price
       tags:
       - subscriptions

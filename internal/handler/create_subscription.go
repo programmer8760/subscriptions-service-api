@@ -23,14 +23,14 @@ type CreateSubscriptionRequest struct {
 // @Produce json
 // @Param request body CreateSubscriptionRequest true "Subscription payload"
 // @Success 201 {object} domain.Subscription
-// @Failure 400 {string} string "bad request"
-// @Failure 500 {string} string "internal server error"
+// @Failure 400 {object} domain.ErrorResponse
+// @Failure 500 {object} domain.ErrorResponse
 // @Router /subscriptions [post]
 func (h *Handler) CreateSubscription(w http.ResponseWriter, r *http.Request) {
 	var req CreateSubscriptionRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
-		http.Error(w, err.Error(), 400)
+		WriteErrorJSON(w, err, 400)
 		return
 	}
 
@@ -44,7 +44,7 @@ func (h *Handler) CreateSubscription(w http.ResponseWriter, r *http.Request) {
 		EndDate:   req.EndDate,
 	})
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		WriteErrorJSON(w, err, 500)
 		return
 	}
 

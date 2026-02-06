@@ -19,18 +19,18 @@ import (
 // @Param user_id path string false "User ID to filter subscriptions by"
 // @Param name path string false "Name of subscription to filter by"
 // @Success 200 {string} string
-// @Failure 400 {string} string "bad request"
-// @Failure 500 {string} string "internal server error"
+// @Failure 400 {object} domain.ErrorResponse
+// @Failure 500 {object} domain.ErrorResponse
 // @Router /subscriptions/price [get]
 func (h *Handler) GetTotalPrice(w http.ResponseWriter, r *http.Request) {
 	from, err := time.Parse("01-2006", r.URL.Query().Get("from"))
 	if err != nil {
-		http.Error(w, domain.ErrInvalidFromDate.Error(), 400)
+		WriteErrorJSON(w, domain.ErrInvalidFromDate, 400)
 		return
 	}
 	to, err := time.Parse("01-2006", r.URL.Query().Get("to"))
 	if err != nil {
-		http.Error(w, domain.ErrInvalidToDate.Error(), 400)
+		WriteErrorJSON(w, domain.ErrInvalidToDate, 400)
 		return
 	}
 	var name *string
@@ -40,7 +40,7 @@ func (h *Handler) GetTotalPrice(w http.ResponseWriter, r *http.Request) {
 	var userID *uuid.UUID
 	if uidStr := r.URL.Query().Get("user_id"); uidStr != "" {
 		if uid, err := uuid.Parse(uidStr); err != nil {
-			http.Error(w, err.Error(), 400)
+			WriteErrorJSON(w, err, 400)
 			return
 		} else {
 			userID = &uid
@@ -56,7 +56,7 @@ func (h *Handler) GetTotalPrice(w http.ResponseWriter, r *http.Request) {
 		UserID: userID,
 	})
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		WriteErrorJSON(w, err, 500)
 		return
 	}
 

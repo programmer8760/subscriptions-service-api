@@ -25,20 +25,20 @@ type UpdateSubscriptionRequest struct {
 // @Param id path string true "Subscription ID"
 // @Param request body UpdateSubscriptionRequest true "Subscription payload"
 // @Success 204 "No Content"
-// @Failure 400 {string} string "bad request"
-// @Failure 500 {string} string "internal server error"
+// @Failure 400 {object} domain.ErrorResponse
+// @Failure 500 {object} domain.ErrorResponse
 // @Router /subscriptions [put]
 func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
 	var req UpdateSubscriptionRequest
 	id64, err := strconv.ParseUint(r.PathValue("id"), 10, 64)
 	if err != nil {
-		http.Error(w, err.Error(), 400)
+		WriteErrorJSON(w, err, 400)
 		return
 	}
 
 	err = json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
-		http.Error(w, err.Error(), 400)
+		WriteErrorJSON(w, err, 400)
 		return
 	}
 
@@ -53,7 +53,7 @@ func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
 		EndDate:   req.EndDate,
 	})
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		WriteErrorJSON(w, err, 500)
 		return
 	}
 

@@ -1,8 +1,10 @@
 package handler
 
 import (
+	"encoding/json"
 	"net/http"
 
+	"github.com/prajkin/em-test-task/internal/domain"
 	"github.com/prajkin/em-test-task/internal/service"
 	swagger "github.com/swaggo/http-swagger"
 )
@@ -32,4 +34,11 @@ func NewHandler(subs *service.SubscriptionsService) *Handler {
 
 func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	h.routes.ServeHTTP(w, r)
+}
+
+func WriteErrorJSON(w http.ResponseWriter, err error, code int) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(code)
+	resp := domain.ErrorResponse{Error: err.Error()}
+	json.NewEncoder(w).Encode(resp)
 }

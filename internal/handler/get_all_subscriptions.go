@@ -11,14 +11,14 @@ import (
 // @Accept json
 // @Produce json
 // @Success 200 {array} domain.Subscription
-// @Failure 500 {string} string "internal server error"
+// @Failure 500 {object} domain.ErrorResponse
 // @Router /subscriptions [get]
 func (h *Handler) GetAllSubscriptions(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	resp, err := h.subscriptions.GetAllSubscriptions(ctx)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		WriteErrorJSON(w, err, 500)
 		return
 	}
 

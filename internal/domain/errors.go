@@ -14,3 +14,7 @@ var (
 	ErrInvalidToDate        = errors.New("invalid period end date")
 	ErrEndBeforeStart       = errors.New("end date must be after start date")
 )
+
+type ErrorResponse struct {
+	Error string `json:"error"`
+}
