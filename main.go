@@ -55,8 +55,8 @@ func main() {
 	}
 
 	repo := repository.NewSubscriptionsRepository(db)
-	svc := service.NewSubscriptionsService(repo)
-	h := handler.NewHandler(svc)
+	svc := service.NewSubscriptionsService(repo, log)
+	h := handler.NewHandler(svc, log)
 	if err = http.ListenAndServe(":8080", h); err != nil {
 		log.Error("http server stopped", "err", err, "addr", ":8080")
 		os.Exit(1)

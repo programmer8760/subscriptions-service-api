@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"log/slog"
 	"net/http"
 
 	"github.com/prajkin/em-test-task/internal/domain"
@@ -12,12 +13,14 @@ import (
 type Handler struct {
 	routes        *http.ServeMux
 	subscriptions *service.SubscriptionsService
+	logger        *slog.Logger
 }
 
-func NewHandler(subs *service.SubscriptionsService) *Handler {
+func NewHandler(subs *service.SubscriptionsService, log *slog.Logger) *Handler {
 	h := &Handler{
 		routes:        http.NewServeMux(),
 		subscriptions: subs,
+		logger:        log,
 	}
 
 	h.routes.HandleFunc("GET /subscriptions", h.GetAllSubscriptions)
