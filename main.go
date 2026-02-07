@@ -23,10 +23,12 @@ import (
 func main() {
 	log := logger.New(slog.LevelInfo)
 
-	err := godotenv.Load()
-	if err != nil {
-		log.Error("loading .env file failed", "err", err)
-		os.Exit(1)
+	if _, ok := os.LookupEnv("HTTP_PORT"); !ok {
+		err := godotenv.Load()
+		if err != nil {
+			log.Error("loading .env file failed", "err", err)
+			os.Exit(1)
+		}
 	}
 
 	db, err := database.Connect()
