@@ -56,6 +56,7 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		"request_id", reqID,
 		"method", r.Method,
 		"path", r.URL.Path,
+		"query", r.URL.RawQuery,
 		"status", ww.Status(),
 		"duration_ms", time.Since(start).Milliseconds(),
 	)

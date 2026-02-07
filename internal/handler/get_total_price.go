@@ -53,7 +53,6 @@ func (h *Handler) GetTotalPrice(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := r.Context()
-	h.logger.Info("request body", "request_id", ctx.Value(domain.RequestIDKey), "from", from, "to", to, "name", name, "user_id", userID)
 
 	resp, err := h.subscriptions.GetTotalPrice(ctx, dto.GetTotalPriceDTO{
 		From:   domain.NewDate(from),
