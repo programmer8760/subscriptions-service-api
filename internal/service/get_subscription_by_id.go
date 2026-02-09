@@ -6,7 +6,7 @@ import (
 	"github.com/prajkin/em-test-task/internal/domain"
 )
 
-func (s *SubscriptionsService) GetSubscriptionByID(ctx context.Context, id uint) (domain.Subscription, error) {
+func (s *subscriptionsService) GetSubscriptionByID(ctx context.Context, id uint) (domain.Subscription, error) {
 	if id == 0 {
 		return domain.Subscription{}, domain.ErrInvalidID
 	}

@@ -7,7 +7,7 @@ import (
 	"github.com/prajkin/em-test-task/internal/domain"
 )
 
-func (s *SubscriptionsService) CreateSubscription(ctx context.Context, sub domain.Subscription) (domain.Subscription, error) {
+func (s *subscriptionsService) CreateSubscription(ctx context.Context, sub domain.Subscription) (domain.Subscription, error) {
 	if sub.Name = strings.TrimSpace(sub.Name); sub.Name == "" {
 		return domain.Subscription{}, domain.BadRequest{Err: domain.ErrInvalidName}
 	}

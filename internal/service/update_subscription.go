@@ -8,7 +8,7 @@ import (
 	"github.com/prajkin/em-test-task/internal/dto"
 )
 
-func (s *SubscriptionsService) UpdateSubscription(ctx context.Context, req dto.UpdateSubscriptionDTO) (domain.Subscription, error) {
+func (s *subscriptionsService) UpdateSubscription(ctx context.Context, req dto.UpdateSubscriptionDTO) (domain.Subscription, error) {
 	if req.ID == 0 {
 		return domain.Subscription{}, domain.BadRequest{Err: domain.ErrInvalidID}
 	}

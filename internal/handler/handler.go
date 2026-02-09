@@ -15,11 +15,11 @@ import (
 
 type Handler struct {
 	routes        *http.ServeMux
-	subscriptions *service.SubscriptionsService
+	subscriptions service.SubscriptionsService
 	logger        *slog.Logger
 }
 
-func NewHandler(subs *service.SubscriptionsService, log *slog.Logger) *Handler {
+func NewHandler(subs service.SubscriptionsService, log *slog.Logger) *Handler {
 	h := &Handler{
 		routes:        http.NewServeMux(),
 		subscriptions: subs,

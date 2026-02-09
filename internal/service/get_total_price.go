@@ -8,7 +8,7 @@ import (
 	"github.com/prajkin/em-test-task/internal/dto"
 )
 
-func (s *SubscriptionsService) GetTotalPrice(ctx context.Context, req dto.GetTotalPriceDTO) (int, error) {
+func (s *subscriptionsService) GetTotalPrice(ctx context.Context, req dto.GetTotalPriceDTO) (int, error) {
 	if req.From.Time.IsZero() {
 		return 0, domain.BadRequest{domain.ErrInvalidFromDate}
 	}
