@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/prajkin/em-test-task/internal/domain"
+	"github.com/programmer8760/subscriptions-service-api/internal/domain"
 )
 
 // @Summary Delete subscription

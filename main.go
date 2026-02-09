@@ -12,12 +12,12 @@ import (
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/joho/godotenv"
-	"github.com/prajkin/em-test-task/database"
-	_ "github.com/prajkin/em-test-task/docs"
-	"github.com/prajkin/em-test-task/internal/handler"
-	"github.com/prajkin/em-test-task/internal/logger"
-	"github.com/prajkin/em-test-task/internal/repository"
-	"github.com/prajkin/em-test-task/internal/service"
+	"github.com/programmer8760/subscriptions-service-api/database"
+	_ "github.com/programmer8760/subscriptions-service-api/docs"
+	"github.com/programmer8760/subscriptions-service-api/internal/handler"
+	"github.com/programmer8760/subscriptions-service-api/internal/logger"
+	"github.com/programmer8760/subscriptions-service-api/internal/repository"
+	"github.com/programmer8760/subscriptions-service-api/internal/service"
 )
 
 // @title Subscriptions API

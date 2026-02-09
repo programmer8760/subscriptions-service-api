@@ -1,4 +1,4 @@
-module github.com/prajkin/em-test-task
+module github.com/programmer8760/subscriptions-service-api
 
 go 1.25.3
 

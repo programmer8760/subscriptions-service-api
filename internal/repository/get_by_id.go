@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/prajkin/em-test-task/internal/domain"
+	"github.com/programmer8760/subscriptions-service-api/internal/domain"
 )
 
 func (r *PostgresSubscriptionsRepository) GetByID(ctx context.Context, id uint) (domain.Subscription, error) {

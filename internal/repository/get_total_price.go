@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 
-	"github.com/prajkin/em-test-task/internal/dto"
+	"github.com/programmer8760/subscriptions-service-api/internal/dto"
 )
 
 func (r *PostgresSubscriptionsRepository) GetTotalPrice(ctx context.Context, req dto.GetTotalPriceDTO) (int, error) {

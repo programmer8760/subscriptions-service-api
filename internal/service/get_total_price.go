@@ -4,8 +4,8 @@ import (
 	"context"
 	"strings"
 
-	"github.com/prajkin/em-test-task/internal/domain"
-	"github.com/prajkin/em-test-task/internal/dto"
+	"github.com/programmer8760/subscriptions-service-api/internal/domain"
+	"github.com/programmer8760/subscriptions-service-api/internal/dto"
 )
 
 func (s *subscriptionsService) GetTotalPrice(ctx context.Context, req dto.GetTotalPriceDTO) (int, error) {

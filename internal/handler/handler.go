@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/prajkin/em-test-task/internal/domain"
-	"github.com/prajkin/em-test-task/internal/service"
+	"github.com/programmer8760/subscriptions-service-api/internal/domain"
+	"github.com/programmer8760/subscriptions-service-api/internal/service"
 	swagger "github.com/swaggo/http-swagger"
 )
 

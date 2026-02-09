@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/prajkin/em-test-task/internal/domain"
+	"github.com/programmer8760/subscriptions-service-api/internal/domain"
 )
 
 func (s *subscriptionsService) GetSubscriptionByID(ctx context.Context, id uint) (domain.Subscription, error) {

@@ -4,9 +4,9 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/prajkin/em-test-task/internal/domain"
-	"github.com/prajkin/em-test-task/internal/dto"
-	"github.com/prajkin/em-test-task/internal/repository"
+	"github.com/programmer8760/subscriptions-service-api/internal/domain"
+	"github.com/programmer8760/subscriptions-service-api/internal/dto"
+	"github.com/programmer8760/subscriptions-service-api/internal/repository"
 )
 
 type SubscriptionsService interface {

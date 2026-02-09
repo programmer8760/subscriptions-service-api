@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/prajkin/em-test-task/internal/domain"
+	"github.com/programmer8760/subscriptions-service-api/internal/domain"
 )
 
 func (r *PostgresSubscriptionsRepository) List(ctx context.Context) ([]domain.Subscription, error) {

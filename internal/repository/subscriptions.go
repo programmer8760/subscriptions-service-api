@@ -4,8 +4,8 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/prajkin/em-test-task/internal/domain"
-	"github.com/prajkin/em-test-task/internal/dto"
+	"github.com/programmer8760/subscriptions-service-api/internal/domain"
+	"github.com/programmer8760/subscriptions-service-api/internal/dto"
 )
 
 type SubscriptionsRepository interface {
