@@ -25,7 +25,7 @@ type UpdateSubscriptionRequest struct {
 // @Accept json
 // @Param id path string true "Subscription ID"
 // @Param request body UpdateSubscriptionRequest true "Subscription payload"
-// @Success 204 "No Content"
+// @Success 200 {object} domain.Subscription
 // @Failure 400 {object} domain.ErrorResponse
 // @Failure 404 {object} domain.ErrorResponse
 // @Failure 500 {object} domain.ErrorResponse
@@ -47,7 +47,7 @@ func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	h.logger.Info("request body", "request_id", ctx.Value(domain.RequestIDKey), "input", req)
 
-	err = h.subscriptions.UpdateSubscription(ctx, dto.UpdateSubscriptionDTO{
+	resp, err := h.subscriptions.UpdateSubscription(ctx, dto.UpdateSubscriptionDTO{
 		ID:        uint(id64),
 		Name:      req.Name,
 		Price:     req.Price,
@@ -70,5 +70,6 @@ func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusNoContent)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(resp)
 }
