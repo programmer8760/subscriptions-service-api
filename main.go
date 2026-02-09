@@ -1,10 +1,14 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"log/slog"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/joho/godotenv"
@@ -33,11 +37,11 @@ func main() {
 	}
 
 	db, err := database.Connect()
+	defer db.Close()
 	if err != nil {
 		log.Error("database connection failed", "err", err)
 		os.Exit(1)
 	}
-	defer db.Close()
 
 	if err = db.Ping(); err != nil {
 		log.Error("database didn't respond to ping", "err", err)
@@ -62,9 +66,32 @@ func main() {
 	h := handler.NewHandler(svc, log)
 
 	addr := ":" + os.Getenv("HTTP_PORT")
-	log.Info("http server started", "addr", addr)
-	if err = http.ListenAndServe(addr, h); err != nil {
-		log.Error("http server stopped", "err", err, "addr", addr)
-		os.Exit(1)
+	server := &http.Server{
+		Addr:    addr,
+		Handler: h,
 	}
+	go func() {
+		log.Info("http server started", "addr", addr)
+		if err = server.ListenAndServe(); err != nil {
+			if !errors.Is(err, http.ErrServerClosed) {
+				log.Error("http server stopped", "err", err)
+			}
+		}
+	}()
+
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, syscall.SIGINT, syscall.SIGTERM)
+
+	<-stop
+	log.Info("shutdown signal received")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	if err = server.Shutdown(ctx); err != nil {
+		log.Error("graceful shutdown failed", "err", err)
+		_ = server.Close()
+	}
+
+	log.Info("server stopped gracefully")
 }
