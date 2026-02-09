@@ -60,7 +60,7 @@ definitions:
 host: localhost:8080
 info:
   contact: {}
-  description: Simple subscription service
+  description: Simple subscriptions service
   title: Subscriptions API
   version: "1.0"
 paths:

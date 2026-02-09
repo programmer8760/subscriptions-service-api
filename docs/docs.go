@@ -388,7 +388,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Subscriptions API",
-	Description:      "Simple subscription service",
+	Description:      "Simple subscriptions service",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

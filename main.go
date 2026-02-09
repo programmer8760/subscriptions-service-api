@@ -22,7 +22,7 @@ import (
 
 // @title Subscriptions API
 // @version 1.0
-// @description Simple subscription service
+// @description Simple subscriptions service
 // @host localhost:8080
 // @BasePath /
 func main() {
