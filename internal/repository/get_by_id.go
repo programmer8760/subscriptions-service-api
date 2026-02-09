@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"database/sql"
+	"errors"
 
 	"github.com/prajkin/em-test-task/internal/domain"
 )
@@ -19,7 +20,7 @@ func (r *SubscriptionsRepository) GetByID(ctx context.Context, id uint) (domain.
 		id,
 	).Scan(&sub.ID, &sub.Name, &sub.Price, &sub.UserID, &startDate, &endDate)
 	if err != nil {
-		if err == sql.ErrNoRows {
+		if errors.Is(err, sql.ErrNoRows) {
 			return domain.Subscription{}, domain.ErrSubscriptionNotFound
 		}
 		return domain.Subscription{}, err

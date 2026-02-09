@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"log/slog"
 	"net/http"
 	"os"
@@ -46,7 +47,7 @@ func main() {
 
 	err = database.MigrateUp(db)
 	if err != nil {
-		if err == migrate.ErrNoChange {
+		if errors.Is(err, migrate.ErrNoChange) {
 			log.Info("database migrations: no changes")
 		} else {
 			log.Error("database migration failed", "err", err)

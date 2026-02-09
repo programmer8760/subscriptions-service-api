@@ -27,11 +27,11 @@ func (h *Handler) DeleteSubscription(w http.ResponseWriter, r *http.Request) {
 
 	err = h.subscriptions.DeleteSubscription(ctx, uint(id64))
 	if err != nil {
-		if err == domain.ErrSubscriptionNotFound {
+		if errors.Is(err, domain.ErrSubscriptionNotFound) {
 			WriteErrorJSON(w, err, 404)
 			return
 		}
-		if err == domain.ErrInvalidID {
+		if errors.Is(err, domain.ErrInvalidID) {
 			WriteErrorJSON(w, err, 400)
 			return
 		}

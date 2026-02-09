@@ -61,7 +61,7 @@ func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
 			WriteErrorJSON(w, err, 400)
 			return
 		}
-		if err == domain.ErrSubscriptionNotFound {
+		if errors.Is(err, domain.ErrSubscriptionNotFound) {
 			WriteErrorJSON(w, err, 404)
 			return
 		}
