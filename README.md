@@ -17,6 +17,9 @@ DB_USER=admin
 DB_PASSWORD=admin
 # The port at which the API will be available
 HTTP_PORT=8080
+# Set to 1 to enable debug level logs,
+# set to anything else to disable them
+DEBUG=1
 ```
 
 Swagger documentation can be accessed on /swagger/index.html
