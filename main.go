@@ -26,15 +26,22 @@ import (
 // @host localhost:8080
 // @BasePath /
 func main() {
-	log := logger.New(slog.LevelInfo)
-
+	logLevel := slog.LevelInfo
 	if _, ok := os.LookupEnv("HTTP_PORT"); !ok {
 		err := godotenv.Load()
 		if err != nil {
+			log := logger.New(logLevel)
 			log.Error("loading .env file failed", "err", err)
 			os.Exit(1)
 		}
 	}
+	debug := os.Getenv("DEBUG") == "1"
+	if debug {
+		logLevel = slog.LevelDebug
+	}
+
+	log := logger.New(logLevel)
+	log.Debug("logging in debug mode")
 
 	db, err := database.Connect()
 	defer db.Close()

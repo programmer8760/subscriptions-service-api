@@ -45,7 +45,7 @@ func (h *Handler) UpdateSubscription(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := r.Context()
-	h.logger.Info("request body", "request_id", ctx.Value(domain.RequestIDKey), "input", req)
+	h.logger.Debug("request body", "request_id", ctx.Value(domain.RequestIDKey), "input", req)
 
 	resp, err := h.subscriptions.UpdateSubscription(ctx, dto.UpdateSubscriptionDTO{
 		ID:        uint(id64),

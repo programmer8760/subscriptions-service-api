@@ -52,7 +52,7 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	h.routes.ServeHTTP(ww, r)
 
-	h.logger.Info("request",
+	h.logger.Debug("request",
 		"request_id", reqID,
 		"method", r.Method,
 		"path", r.URL.Path,
