@@ -57,7 +57,7 @@ func main() {
 		log.Info("database migrations: success")
 	}
 
-	repo := repository.NewSubscriptionsRepository(db)
+	repo := repository.NewPostgresSubscriptionsRepository(db)
 	svc := service.NewSubscriptionsService(repo, log)
 	h := handler.NewHandler(svc, log)
 

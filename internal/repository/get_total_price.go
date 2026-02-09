@@ -6,7 +6,7 @@ import (
 	"github.com/prajkin/em-test-task/internal/dto"
 )
 
-func (r *SubscriptionsRepository) GetTotalPrice(ctx context.Context, req dto.GetTotalPriceDTO) (int, error) {
+func (r *PostgresSubscriptionsRepository) GetTotalPrice(ctx context.Context, req dto.GetTotalPriceDTO) (int, error) {
 	var total int
 
 	err := r.db.QueryRowContext(

@@ -8,7 +8,7 @@ import (
 	"github.com/prajkin/em-test-task/internal/domain"
 )
 
-func (r *SubscriptionsRepository) GetByID(ctx context.Context, id uint) (domain.Subscription, error) {
+func (r *PostgresSubscriptionsRepository) GetByID(ctx context.Context, id uint) (domain.Subscription, error) {
 	var (
 		sub       domain.Subscription
 		startDate sql.NullTime

@@ -6,7 +6,7 @@ import (
 	"github.com/prajkin/em-test-task/internal/domain"
 )
 
-func (r *SubscriptionsRepository) Delete(ctx context.Context, id uint) error {
+func (r *PostgresSubscriptionsRepository) Delete(ctx context.Context, id uint) error {
 	res, err := r.db.ExecContext(
 		ctx,
 		"DELETE FROM subscriptions WHERE id = $1",

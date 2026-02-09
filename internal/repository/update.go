@@ -9,7 +9,7 @@ import (
 	"github.com/prajkin/em-test-task/internal/dto"
 )
 
-func (r *SubscriptionsRepository) Update(ctx context.Context, req dto.UpdateSubscriptionDTO) (domain.Subscription, error) {
+func (r *PostgresSubscriptionsRepository) Update(ctx context.Context, req dto.UpdateSubscriptionDTO) (domain.Subscription, error) {
 	var sub domain.Subscription
 	err := r.db.QueryRowContext(
 		ctx,

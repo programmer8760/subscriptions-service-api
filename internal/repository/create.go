@@ -7,7 +7,7 @@ import (
 	"github.com/prajkin/em-test-task/internal/domain"
 )
 
-func (r *SubscriptionsRepository) Create(ctx context.Context, sub *domain.Subscription) error {
+func (r *PostgresSubscriptionsRepository) Create(ctx context.Context, sub *domain.Subscription) error {
 	var endDate *time.Time
 	if sub.EndDate != nil {
 		endDate = &sub.EndDate.Time

@@ -7,7 +7,7 @@ import (
 	"github.com/prajkin/em-test-task/internal/domain"
 )
 
-func (r *SubscriptionsRepository) List(ctx context.Context) ([]domain.Subscription, error) {
+func (r *PostgresSubscriptionsRepository) List(ctx context.Context) ([]domain.Subscription, error) {
 	rows, err := r.db.QueryContext(
 		ctx,
 		"SELECT * FROM subscriptions",
