@@ -21,6 +21,8 @@ var (
 	ErrInvalidFromDate      = errors.New("invalid period start date")
 	ErrInvalidToDate        = errors.New("invalid period end date")
 	ErrEndBeforeStart       = errors.New("end date must be after start date")
+	ErrInvalidPage          = errors.New("invalid page number")
+	ErrInvalidPageSize      = errors.New("invalid page size")
 )
 
 type ErrorResponse struct {
