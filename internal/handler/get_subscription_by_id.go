@@ -26,6 +26,7 @@ func (h *Handler) GetSubscriptionByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	ctx := r.Context()
+	log := h.logger.With("request_id", ctx.Value(domain.RequestIDKey))
 
 	resp, err := h.subscriptions.GetSubscriptionByID(ctx, uint(id64))
 	if err != nil {
@@ -37,7 +38,7 @@ func (h *Handler) GetSubscriptionByID(w http.ResponseWriter, r *http.Request) {
 			WriteErrorJSON(w, err, 400)
 			return
 		}
-		h.logger.Error("failed to get subscription by id", "request_id", ctx.Value(domain.RequestIDKey), "err", err)
+		log.Error("failed to get subscription by id", "err", err)
 		WriteErrorJSON(w, errors.New("internal server error"), 500)
 		return
 	}

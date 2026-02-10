@@ -53,6 +53,7 @@ func (h *Handler) GetTotalPrice(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := r.Context()
+	log := h.logger.With("request_id", ctx.Value(domain.RequestIDKey))
 
 	resp, err := h.subscriptions.GetTotalPrice(ctx, dto.GetTotalPriceDTO{
 		From:   domain.NewDate(from),
@@ -66,7 +67,7 @@ func (h *Handler) GetTotalPrice(w http.ResponseWriter, r *http.Request) {
 			WriteErrorJSON(w, err, 400)
 			return
 		}
-		h.logger.Error("failed to get total subscriptions price", "request_id", ctx.Value(domain.RequestIDKey), "err", err)
+		log.Error("failed to get total subscriptions price", "err", err)
 		WriteErrorJSON(w, errors.New("internal server error"), 500)
 		return
 	}

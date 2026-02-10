@@ -22,6 +22,7 @@ import (
 // @Router /subscriptions [get]
 func (h *Handler) GetAllSubscriptions(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
+	log := h.logger.With("request_id", ctx.Value(domain.RequestIDKey))
 
 	var req dto.GetAllSubscriptionsDTO
 	if pageStr := r.URL.Query().Get("page"); pageStr != "" {
@@ -47,7 +48,7 @@ func (h *Handler) GetAllSubscriptions(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := h.subscriptions.GetAllSubscriptions(ctx, req)
 	if err != nil {
-		h.logger.Error("failed to get all subscriptions", "request_id", ctx.Value(domain.RequestIDKey), "err", err)
+		log.Error("failed to get all subscriptions", "err", err)
 		WriteErrorJSON(w, errors.New("internal server error"), 500)
 		return
 	}
