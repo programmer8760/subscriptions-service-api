@@ -21,7 +21,7 @@ func (s *subscriptionsService) CreateSubscription(ctx context.Context, sub domai
 		if (*sub.EndDate).Time.IsZero() {
 			return domain.Subscription{}, domain.BadRequest{Err: domain.ErrInvalidEndDate}
 		}
-		if (*sub.EndDate).Time.Before(sub.StartDate.Time) {
+		if !(*sub.EndDate).Time.After(sub.StartDate.Time) {
 			return domain.Subscription{}, domain.BadRequest{Err: domain.ErrEndBeforeStart}
 		}
 	}

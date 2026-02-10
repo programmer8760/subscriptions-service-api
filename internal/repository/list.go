@@ -5,12 +5,24 @@ import (
 	"database/sql"
 
 	"github.com/programmer8760/subscriptions-service-api/internal/domain"
+	"github.com/programmer8760/subscriptions-service-api/internal/dto"
 )
 
-func (r *PostgresSubscriptionsRepository) List(ctx context.Context) ([]domain.Subscription, error) {
+func (r *PostgresSubscriptionsRepository) List(ctx context.Context, req dto.GetAllSubscriptionsDTO) ([]domain.Subscription, error) {
+	limit := domain.DefaultPageSize
+	if req.PageSize != nil {
+		limit = *req.PageSize
+	}
+	var offset uint
+	if req.Page != nil {
+		offset = (*req.Page - 1) * limit
+	}
+
 	rows, err := r.db.QueryContext(
 		ctx,
-		"SELECT * FROM subscriptions",
+		"SELECT * FROM subscriptions LIMIT $1 OFFSET $2",
+		limit,
+		offset,
 	)
 	if err != nil {
 		return nil, err

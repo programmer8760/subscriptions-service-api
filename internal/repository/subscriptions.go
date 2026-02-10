@@ -13,7 +13,7 @@ type SubscriptionsRepository interface {
 	GetByID(ctx context.Context, id uint) (domain.Subscription, error)
 	Update(ctx context.Context, req dto.UpdateSubscriptionDTO) (domain.Subscription, error)
 	Delete(ctx context.Context, id uint) error
-	List(ctx context.Context) ([]domain.Subscription, error)
+	List(ctx context.Context, req dto.GetAllSubscriptionsDTO) ([]domain.Subscription, error)
 	GetTotalPrice(ctx context.Context, req dto.GetTotalPriceDTO) (int, error)
 }
 

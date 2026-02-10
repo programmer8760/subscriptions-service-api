@@ -28,6 +28,22 @@ const docTemplate = `{
                     "subscriptions"
                 ],
                 "summary": "Get all subscriptions",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "1",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "default": "20",
+                        "description": "Number of subscriptions per page",
+                        "name": "page_size",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",

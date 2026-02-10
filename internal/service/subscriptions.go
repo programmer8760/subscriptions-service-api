@@ -12,7 +12,7 @@ import (
 type SubscriptionsService interface {
 	CreateSubscription(ctx context.Context, sub domain.Subscription) (domain.Subscription, error)
 	DeleteSubscription(ctx context.Context, id uint) error
-	GetAllSubscriptions(ctx context.Context) ([]domain.Subscription, error)
+	GetAllSubscriptions(ctx context.Context, req dto.GetAllSubscriptionsDTO) ([]domain.Subscription, error)
 	GetSubscriptionByID(ctx context.Context, id uint) (domain.Subscription, error)
 	GetTotalPrice(ctx context.Context, req dto.GetTotalPriceDTO) (int, error)
 	UpdateSubscription(ctx context.Context, req dto.UpdateSubscriptionDTO) (domain.Subscription, error)
